@@ -16,7 +16,7 @@ function App() {
           <img src={viteLogo} className="vite" alt="Vite logo" />
         </div>
         <div>
-          <h1>Meme time</h1>
+          <h1>Meme time..</h1>
           <p>
             Edit <code>src/App.jsx</code> and save to see <code>HMR</code> in action
           </p>
