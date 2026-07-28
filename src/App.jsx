@@ -16,7 +16,7 @@ function App() {
           <img src={viteLogo} className="vite" alt="Vite logo" />
         </div>
         <div>
-          <h1>Meme time....</h1>
+          <h1>Meme time!</h1>
           <p>
             Edit <code>src/App.jsx</code> and save to see <code>HMR</code> in action
           </p>
@@ -59,7 +59,7 @@ function App() {
             <use href="/icons.svg#social-icon"></use>
           </svg>
           <h2>Connect with DennyM55</h2>
-          <p>Join the Vite community</p>
+          <p>Join the meme crew</p>
           <ul>
             <li>
               <a href="https://github.com/vitejs/vite" target="_blank">
