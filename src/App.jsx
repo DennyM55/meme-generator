@@ -58,7 +58,7 @@ function App() {
           <svg className="icon" role="presentation" aria-hidden="true">
             <use href="/icons.svg#social-icon"></use>
           </svg>
-          <h2>Connect with DennyM55</h2>
+          <h2>Connect with DennyM55 Repo.</h2>
           <p>Join the meme crew</p>
           <ul>
             <li>
