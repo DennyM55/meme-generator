@@ -1,13 +1,13 @@
 import { useState } from "react";
 
-function MemeForm() {
+function MemeForm({ title, buttonText }) {
 
     const [memeIdea, setMemeIdea] = useState("Hello Denny");
     const [category, setCategory] = useState("");
 
     return (
         <>
-            <h2>Create your meme</h2>
+            <h2>{title}</h2>
 
             <input
                 type="text"
@@ -36,7 +36,7 @@ function MemeForm() {
                     console.log("Category:", category);
                 }}
             >
-                Generate Meme
+                {buttonText}
             </button>
 
             <p>

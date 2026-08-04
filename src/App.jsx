@@ -7,7 +7,10 @@ function App() {
             <Header />
 
             <main>
-                <MemeForm />
+                <MemeForm
+                    title="AI Meme Generator"
+                    buttonText="Generate AI Meme"
+                />
             </main>
         </>
     );
