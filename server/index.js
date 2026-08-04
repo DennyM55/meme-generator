@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 app.post("/api/memes", async (req, res) => {
-    const { memeIdea, category } = req.body;
+    const {memeIdea, category} = req.body;
     const imageResponse = await axios.get(
         "https://api.imgflip.com/get_memes"
     );
@@ -24,7 +24,19 @@ app.post("/api/memes", async (req, res) => {
                 messages: [
                     {
                         role: "system",
-                        content: "You are a funny meme generator. Return only 3 meme captions as a JSON array."
+                        content: `
+You are a meme generator.
+
+Rules:
+- Return exactly 3 captions.
+- Return only valid JSON.
+- Return a JSON array of 3 strings.
+- Do not use markdown.
+- Do not add explanations.
+
+Example:
+["caption 1", "caption 2", "caption 3"]
+`
                     },
                     {
                         role: "user",
