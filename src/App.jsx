@@ -1,22 +1,20 @@
-import { useState } from "react";
+import {useState} from "react";
 import Header from "./Header";
 import MemeForm from "./MemeForm";
 import MemeList from "./MemeList";
+import {generateMemes} from "./api/memes";
 
 function App() {
     const [memes, setMemes] = useState([]);
 
-    function handleGenerate(memeIdea, category) {
-        const results = [1, 2, 3].map(
-            (number) => `${memeIdea} - ${category} meme ${number}`
-        );
-
+    async function handleGenerate(memeIdea, category) {
+        const results = await generateMemes(memeIdea, category);
         setMemes(results);
     }
 
     return (
         <>
-            <Header />
+            <Header/>
 
             <main>
                 <MemeForm
@@ -25,7 +23,7 @@ function App() {
                     onGenerate={handleGenerate}
                 />
 
-                <MemeList memes={memes} />
+                <MemeList memes={memes}/>
             </main>
         </>
     );
