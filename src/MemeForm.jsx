@@ -2,7 +2,7 @@ import {useState} from "react";
 
 function MemeForm({title, buttonText, onGenerate, loading}) {
 
-    const [memeIdea, setMemeIdea] = useState("Enter your meme idea...");
+    const [memeIdea, setMemeIdea] = useState("");
     const [category, setCategory] = useState("");
 
     return (
@@ -17,7 +17,6 @@ function MemeForm({title, buttonText, onGenerate, loading}) {
                 onChange={(e) => setMemeIdea(e.target.value)}
             />
 
-            <p>You typed: {memeIdea}</p>
 
             <select
                 value={category}
