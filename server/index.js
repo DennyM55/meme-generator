@@ -66,10 +66,29 @@ Example:
 
         const captions = JSON.parse(cleanedText);
 
-        const results = captions.map((caption, index) => ({
-            caption,
-            image: templates[index].url
-        }));
+        const results = [];
+
+        for (let i = 0; i < captions.length; i++) {
+
+            const memeResponse = await axios.post(
+                "https://api.imgflip.com/caption_image",
+                null,
+                {
+                    params: {
+                        template_id: templates[i].id,
+                        username: process.env.IMGFLIP_USERNAME,
+                        password: process.env.IMGFLIP_PASSWORD,
+                        text0: captions[i],
+                        text1: ""
+                    }
+                }
+            );
+
+            results.push({
+                caption: captions[i],
+                image: memeResponse.data.data.url
+            });
+        }
 
         res.json(results);
 
