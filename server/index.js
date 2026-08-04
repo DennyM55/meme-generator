@@ -10,18 +10,19 @@ app.use(cors());
 app.use(express.json());
 
 app.post("/api/memes", async (req, res) => {
-    const {memeIdea, category} = req.body;
-    const imageResponse = await axios.get(
-        "https://api.imgflip.com/get_memes"
-    );
-
-    const allTemplates = imageResponse.data.data.memes;
-
-    const templates = [...allTemplates]
-        .sort(() => Math.random() - 0.5)
-        .slice(0, 3);
+    const { memeIdea, category } = req.body;
 
     try {
+        const imageResponse = await axios.get(
+            "https://api.imgflip.com/get_memes"
+        );
+
+        const allTemplates = imageResponse.data.data.memes;
+
+        const templates = [...allTemplates]
+            .sort(() => Math.random() - 0.5)
+            .slice(0, 3);
+
         const response = await axios.post(
             "https://openrouter.ai/api/v1/chat/completions",
             {
@@ -69,20 +70,30 @@ Example:
         const results = [];
 
         for (let i = 0; i < captions.length; i++) {
+            const formData = new URLSearchParams({
+                template_id: String(templates[i].id),
+                username: process.env.IMGFLIP_USERNAME.trim(),
+                password: process.env.IMGFLIP_PASSWORD.trim(),
+                text0: captions[i],
+                text1: ""
+            });
 
             const memeResponse = await axios.post(
                 "https://api.imgflip.com/caption_image",
-                null,
+                formData.toString(),
                 {
-                    params: {
-                        template_id: templates[i].id,
-                        username: process.env.IMGFLIP_USERNAME,
-                        password: process.env.IMGFLIP_PASSWORD,
-                        text0: captions[i],
-                        text1: ""
+                    headers: {
+                        "Content-Type":
+                            "application/x-www-form-urlencoded"
                     }
                 }
             );
+
+            if (!memeResponse.data.success) {
+                throw new Error(
+                    `Imgflip error: ${memeResponse.data.error_message}`
+                );
+            }
 
             results.push({
                 caption: captions[i],
@@ -91,11 +102,14 @@ Example:
         }
 
         res.json(results);
-
-
     } catch (error) {
-        console.error(error.response?.data || error.message);
-        res.status(500).json(["Something went wrong"]);
+        console.error(
+            error.response?.data || error.message
+        );
+
+        res.status(500).json({
+            message: "Something went wrong"
+        });
     }
 });
 
