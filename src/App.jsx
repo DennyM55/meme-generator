@@ -34,6 +34,13 @@ function App() {
                     onGenerate={handleGenerate}
                 />
 
+                {loading && (
+                    <div className="loading-box">
+                        <div className="spinner"></div>
+                        <p>AI is generating memes...</p>
+                    </div>
+                )}
+
                 {error && <p>{error}</p>}
 
                 <MemeList memes={memes} />
