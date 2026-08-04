@@ -1,29 +1,42 @@
-import {useState} from "react";
+import { useState } from "react";
 import Header from "./Header";
 import MemeForm from "./MemeForm";
 import MemeList from "./MemeList";
-import {generateMemes} from "./api/memes";
+import { generateMemes } from "./api/memes";
 
 function App() {
     const [memes, setMemes] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
 
     async function handleGenerate(memeIdea, category) {
-        const results = await generateMemes(memeIdea, category);
-        setMemes(results);
+        try {
+            setLoading(true);
+            setError("");
+
+            const results = await generateMemes(memeIdea, category);
+            setMemes(results);
+        } catch {
+            setError("Could not generate memes.");
+        } finally {
+            setLoading(false);
+        }
     }
 
     return (
         <>
-            <Header/>
+            <Header />
 
             <main>
                 <MemeForm
                     title="AI Meme Generator"
-                    buttonText="Generate AI Meme"
+                    buttonText={loading ? "Generating..." : "Generate AI Meme"}
                     onGenerate={handleGenerate}
                 />
 
-                <MemeList memes={memes}/>
+                {error && <p>{error}</p>}
+
+                <MemeList memes={memes} />
             </main>
         </>
     );

@@ -31,6 +31,7 @@ function MemeForm({title, buttonText, onGenerate}) {
 
             <button
                 type="button"
+                disabled={buttonText === "Generating..."}
                 onClick={() => onGenerate(memeIdea, category)}
             >
                 {buttonText}
