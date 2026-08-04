@@ -3,6 +3,7 @@ import Header from "./Header";
 import MemeForm from "./MemeForm";
 import MemeList from "./MemeList";
 import { generateMemes } from "./api/memes";
+import "./App.css";
 
 function App() {
     const [memes, setMemes] = useState([]);
@@ -32,6 +33,7 @@ function App() {
                     title="AI Meme Generator"
                     buttonText={loading ? "Generating..." : "Generate AI Meme"}
                     onGenerate={handleGenerate}
+                    loading={loading}
                 />
 
                 {loading && (

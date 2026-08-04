@@ -17,7 +17,7 @@ body {
 main {
   width: min(1100px, 92%);
   margin: 0 auto;
-  padding: 24px 0 48px;
+  padding: 50px 20px;
   text-align: center;
 }
 
@@ -52,6 +52,7 @@ button:disabled {
 h1,
 h2,
 h3 {
+  color: white;
   margin-top: 16px;
 }
 
