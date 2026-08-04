@@ -1,8 +1,11 @@
 import Header from "./Header";
 import MemeForm from "./MemeForm";
 import MemeList from "./MemeList";
+import { useState } from "react";
 
 function App() {
+    const [memes, setMemes] = useState([]);
+
     return (
         <>
             <Header/>
@@ -12,8 +15,9 @@ function App() {
                 <MemeForm
                     title="AI Meme Generator"
                     buttonText="Generate AI Meme"
+                    onGenerate={setMemes}
                 />
-                <MemeList/>
+                <MemeList memes={memes} />
             </main>
         </>
     );

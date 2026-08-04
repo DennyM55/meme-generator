@@ -1,12 +1,6 @@
-function MemeList() {
+function MemeList({ memes }) {
 
-    const memes = [
-        "When the code works on the first try 😎",
-        "Me fixing one bug and creating three more 😂",
-        "Deploying on Friday? Brave decision 🚀"
-    ];
-
-    return (
+       return (
         <>
             <h3>Generated Memes</h3>
 

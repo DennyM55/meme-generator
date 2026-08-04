@@ -1,6 +1,6 @@
-import { useState } from "react";
+import {useState} from "react";
 
-function MemeForm({ title, buttonText }) {
+function MemeForm({title, buttonText, onGenerate}) {
 
     const [memeIdea, setMemeIdea] = useState("Hello Denny");
     const [category, setCategory] = useState("");
@@ -32,8 +32,11 @@ function MemeForm({ title, buttonText }) {
             <button
                 type="button"
                 onClick={() => {
-                    console.log("Idea:", memeIdea);
-                    console.log("Category:", category);
+                    onGenerate(
+                        [1, 2, 3].map(
+                            (number) => `${memeIdea} - ${category} meme ${number}`
+                        )
+                    );
                 }}
             >
                 {buttonText}
