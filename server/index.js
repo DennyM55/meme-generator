@@ -15,7 +15,12 @@ app.post("/api/memes", async (req, res) => {
         "https://api.imgflip.com/get_memes"
     );
 
-    const templates = imageResponse.data.data.memes.slice(0, 3);
+    const allTemplates = imageResponse.data.data.memes;
+
+    const templates = [...allTemplates]
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 3);
+
     try {
         const response = await axios.post(
             "https://openrouter.ai/api/v1/chat/completions",
