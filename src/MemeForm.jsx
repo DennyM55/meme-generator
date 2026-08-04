@@ -31,13 +31,7 @@ function MemeForm({title, buttonText, onGenerate}) {
 
             <button
                 type="button"
-                onClick={() => {
-                    onGenerate(
-                        [1, 2, 3].map(
-                            (number) => `${memeIdea} - ${category} meme ${number}`
-                        )
-                    );
-                }}
+                onClick={() => onGenerate(memeIdea, category)}
             >
                 {buttonText}
             </button>
