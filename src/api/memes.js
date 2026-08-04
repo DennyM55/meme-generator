@@ -1,5 +1,13 @@
+import axios from "axios";
+
 export async function generateMemes(memeIdea, category) {
-    return [1, 2, 3].map(
-        (number) => `${memeIdea} - ${category} meme ${number}`
+    const response = await axios.post(
+        "http://localhost:3000/api/memes",
+        {
+            memeIdea,
+            category
+        }
     );
+
+    return response.data;
 }
