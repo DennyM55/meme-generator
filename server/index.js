@@ -11,7 +11,11 @@ app.use(express.json());
 
 app.post("/api/memes", async (req, res) => {
     const { memeIdea, category } = req.body;
+    const imageResponse = await axios.get(
+        "https://api.imgflip.com/get_memes"
+    );
 
+    const templates = imageResponse.data.data.memes.slice(0, 3);
     try {
         const response = await axios.post(
             "https://openrouter.ai/api/v1/chat/completions",
@@ -43,7 +47,15 @@ app.post("/api/memes", async (req, res) => {
             .replace(/```/g, "")
             .trim();
 
-        res.json(JSON.parse(cleanedText));
+        const captions = JSON.parse(cleanedText);
+
+        const results = captions.map((caption, index) => ({
+            caption,
+            image: templates[index].url
+        }));
+
+        res.json(results);
+
 
     } catch (error) {
         console.error(error.response?.data || error.message);
