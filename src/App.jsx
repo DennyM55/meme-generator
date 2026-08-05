@@ -25,10 +25,10 @@ function App() {
     }
 
     return (
-        <>
+        <div className="app-shell">
             <Header />
 
-            <main>
+            <main className="app-main">
                 <MemeForm
                     title="AI Meme Generator"
                     buttonText={loading ? "Generating..." : "Generate AI Meme"}
@@ -37,17 +37,21 @@ function App() {
                 />
 
                 {loading && (
-                    <div className="loading-box">
-                        <div className="spinner"></div>
+                    <div className="loading-box" role="status" aria-live="polite">
+                        <div className="spinner" aria-hidden="true"></div>
                         <p>AI is generating memes...</p>
                     </div>
                 )}
 
-                {error && <p>{error}</p>}
+                {error && (
+                    <p className="error-message" role="alert">
+                        {error}
+                    </p>
+                )}
 
                 <MemeList memes={memes} />
             </main>
-        </>
+        </div>
     );
 }
 
